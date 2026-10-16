@@ -27,6 +27,8 @@ RustDesk 1.5.1, commit 53996e3.
 4. Roteiro de homologação: validar a versão gerada antes de liberar.
 5. Release `1.5.1-getel.<n>`: publicar a release com o número sequencial `<n>`.
 
+Os testes `getel::` rodam em uma chamada separada do `cargo test`, porque a configuração da Getel altera estáticos do processo e quebraria os testes originais se rodasse junto com eles.
+
 ## Versão de teste vs produção
 
 O servidor e a Key ficam em `src/getel.rs`.
