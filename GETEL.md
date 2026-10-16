@@ -13,6 +13,7 @@ RustDesk 1.5.1, commit 53996e3.
 | `src/common.rs` | aplica a configuração da Getel e separa `apply_custom_client_config` |
 | `src/lib.rs` | declara `mod getel` |
 | `src/platform/windows.rs` | desativa a licença pelo nome do exe (servidor e Key não podem ser trocados renomeando o arquivo) |
+| `flutter/lib/desktop/pages/desktop_setting_page.dart` | crédito ao RustDesk (AGPL-3.0) e link do código na tela Sobre |
 
 ## Arquivos novos da Getel
 

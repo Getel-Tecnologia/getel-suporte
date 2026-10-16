@@ -2594,20 +2594,16 @@ class _AboutState extends State<_About> {
               SelectionArea(
                   child: Text('${translate('ID')}: $myId')
                       .marginSymmetric(vertical: 4.0)),
+              SelectionArea(
+                  child: const Text('Baseado no RustDesk (AGPL-3.0)')
+                      .marginSymmetric(vertical: 4.0)),
               InkWell(
                   onTap: () {
-                    launchUrlString('https://rustdesk.com/privacy.html');
+                    launchUrlString(
+                        'https://github.com/Getel-Tecnologia/getel-suporte');
                   },
-                  child: Text(
-                    translate('Privacy Statement'),
-                    style: linkStyle,
-                  ).marginSymmetric(vertical: 4.0)),
-              InkWell(
-                  onTap: () {
-                    launchUrlString('https://rustdesk.com');
-                  },
-                  child: Text(
-                    translate('Website'),
+                  child: const Text(
+                    'Código-fonte: https://github.com/Getel-Tecnologia/getel-suporte',
                     style: linkStyle,
                   ).marginSymmetric(vertical: 4.0)),
               Container(
