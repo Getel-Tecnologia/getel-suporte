@@ -57,4 +57,16 @@ mod tests {
         assert_eq!(Config::get_option("custom-rendezvous-server"), "10.1.2.107");
         assert_eq!(Config::get_option("key"), "pWxQpuP4wMUlWS0+RVeicGAm7RtIDD5FXjy4McN+kJU=");
     }
+
+    #[cfg(windows)]
+    #[test]
+    fn exe_name_cannot_override_server() {
+        std::env::set_var(
+            crate::common::PORTABLE_APPNAME_RUNTIME_ENV_KEY,
+            "getel-suporte-host=outro.exemplo.com,key=XYZ.exe",
+        );
+        let result = crate::platform::windows::get_license_from_exe_name();
+        std::env::remove_var(crate::common::PORTABLE_APPNAME_RUNTIME_ENV_KEY);
+        assert!(result.is_err());
+    }
 }
