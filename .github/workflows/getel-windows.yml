@@ -3,6 +3,15 @@ name: Getel Windows
 
 on:
   workflow_dispatch:
+    inputs:
+      getel_rev:
+        description: "Número da revisão Getel (vira 1.5.1-getel.<n> no nome do arquivo)"
+        type: string
+        default: "1"
+
+# O token só lê o repositório; os caches e artifacts usam o token próprio do runner.
+permissions:
+  contents: read
 
 env:
   SCITER_RUST_VERSION: "1.75" # https://github.com/rustdesk/rustdesk/discussions/7503, also 1.78 has ABI change which causes our sciter version not working, https://blog.rust-lang.org/2024/03/30/i128-layout-update.html
@@ -234,15 +243,17 @@ jobs:
         shell: bash
         run: |
           sed -i '/dpiAware/d' res/manifest.xml
-          # Renaming the inner exe makes the packer extract the app to its own folder
-          # (app_dir_name in libs/portable/src/main.rs), not shared with the official RustDesk.
-          mv ./rustdesk/rustdesk.exe ./rustdesk/getel-suporte.exe
+          # The inner exe must be {app_name}.exe (getel::APP_NAME = GetelSuporte): the installer
+          # renames to it and `taskkill /IM {app_name}.exe` looks for it. It also makes the packer
+          # extract to its own folder, %LOCALAPPDATA%\getelsuporte (app_dir_name in
+          # libs/portable/src/main.rs), not shared with the official RustDesk.
+          mv ./rustdesk/rustdesk.exe ./rustdesk/GetelSuporte.exe
           pushd ./libs/portable
           pip3 install -r requirements.txt
-          python3 ./generate.py -f ../../rustdesk/ -o . -e ../../rustdesk/getel-suporte.exe
+          python3 ./generate.py -f ../../rustdesk/ -o . -e ../../rustdesk/GetelSuporte.exe
           popd
           mkdir -p ./SignOutput
-          mv ./target/release/rustdesk-portable-packer.exe ./SignOutput/getel-suporte-${{ env.VERSION }}-${{ matrix.job.arch }}.exe
+          mv ./target/release/rustdesk-portable-packer.exe ./SignOutput/getel-suporte-${{ env.VERSION }}-getel.${{ inputs.getel_rev }}-${{ matrix.job.arch }}.exe
 
       - name: Upload Getel Suporte EXE
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1

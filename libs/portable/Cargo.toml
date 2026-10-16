@@ -29,8 +29,9 @@ native-windows-gui = {version = "1.0", default-features = false, features = ["an
 [package.metadata.winres]
 LegalCopyright = "Copyright © 2026 Getel Tecnologia. Baseado no RustDesk (Purslane Tech Pte. Ltd.), AGPL-3.0"
 ProductName = "Getel Suporte"
-OriginalFilename = "getel-suporte.exe"
+OriginalFilename = "GetelSuporte.exe"
 FileDescription = "Getel Suporte - Suporte Remoto"
+CompanyName = "Getel Tecnologia"
 #ProductVersion = ""
 
 [target.'cfg(target_os="windows")'.build-dependencies]

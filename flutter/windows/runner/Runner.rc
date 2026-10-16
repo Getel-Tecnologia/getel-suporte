@@ -92,9 +92,9 @@ BEGIN
             VALUE "CompanyName", "Getel Tecnologia" "\0"
             VALUE "FileDescription", "Getel Suporte - Suporte Remoto" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "rustdesk" "\0"
+            VALUE "InternalName", "GetelSuporte" "\0"
             VALUE "LegalCopyright", "Copyright © 2026 Getel Tecnologia. Baseado no RustDesk (Purslane Tech Pte. Ltd.), AGPL-3.0" "\0"
-            VALUE "OriginalFilename", "rustdesk.exe" "\0"
+            VALUE "OriginalFilename", "GetelSuporte.exe" "\0"
             VALUE "ProductName", "Getel Suporte" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
