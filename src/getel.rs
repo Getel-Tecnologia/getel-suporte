@@ -10,10 +10,26 @@ pub const SERVER: &str = "10.1.2.107";
 pub const KEY: &str = "pWxQpuP4wMUlWS0+RVeicGAm7RtIDD5FXjy4McN+kJU=";
 
 pub fn config() -> HashMap<String, serde_json::Value> {
-    HashMap::new()
+    let value = serde_json::json!({
+        "app-name": APP_NAME,
+        "conn-type": "incoming",
+        "override-settings": {
+            "custom-rendezvous-server": SERVER,
+            "relay-server": SERVER,
+            "key": KEY,
+            "hide-network-settings": "Y",
+            "hide-server-settings": "Y"
+        }
+    });
+    match value {
+        serde_json::Value::Object(map) => map.into_iter().collect(),
+        _ => HashMap::new(),
+    }
 }
 
-pub fn apply() {}
+pub fn apply() {
+    crate::common::apply_custom_client_config(config());
+}
 
 #[cfg(test)]
 mod tests {

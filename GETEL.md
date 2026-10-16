@@ -10,11 +10,14 @@ RustDesk 1.5.1, commit 53996e3.
 
 | Arquivo | Motivo |
 | --- | --- |
+| `src/common.rs` | aplica a configuração da Getel e separa `apply_custom_client_config` |
+| `src/lib.rs` | declara `mod getel` |
 
 ## Arquivos novos da Getel
 
 - `GETEL.md`
 - `.github/workflows/getel-windows.yml`
+- `src/getel.rs`
 
 ## Como atualizar
 

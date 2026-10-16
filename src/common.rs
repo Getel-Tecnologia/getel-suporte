@@ -2455,6 +2455,10 @@ pub fn rustdesk_interval(i: Interval) -> ThrottledInterval {
 }
 
 pub fn load_custom_client() {
+    if crate::getel::ENABLED {
+        crate::getel::apply();
+        return;
+    }
     #[cfg(debug_assertions)]
     if let Ok(data) = std::fs::read_to_string("./custom.txt") {
         read_custom_client(data.trim());
@@ -2553,6 +2557,10 @@ pub fn get_dst_align_rgba() -> usize {
 }
 
 pub fn read_custom_client(config: &str) {
+    if crate::getel::ENABLED {
+        crate::getel::apply();
+        return;
+    }
     let Ok(data) = decode64(config) else {
         log::error!("Failed to decode custom client config");
         return;
@@ -2566,13 +2574,16 @@ pub fn read_custom_client(config: &str) {
         log::error!("Failed to dec custom client config");
         return;
     };
-    let Ok(mut data) =
+    let Ok(data) =
         serde_json::from_slice::<std::collections::HashMap<String, serde_json::Value>>(&data)
     else {
         log::error!("Failed to parse custom client config");
         return;
     };
+    apply_custom_client_config(data);
+}
 
+pub fn apply_custom_client_config(mut data: HashMap<String, serde_json::Value>) {
     if let Some(app_name) = data.remove("app-name") {
         if let Some(app_name) = app_name.as_str() {
             *config::APP_NAME.write().unwrap() = app_name.to_owned();
