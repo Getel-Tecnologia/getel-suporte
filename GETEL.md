@@ -14,6 +14,7 @@ RustDesk 1.5.1, commit 53996e3.
 ## Arquivos novos da Getel
 
 - `GETEL.md`
+- `.github/workflows/getel-windows.yml`
 
 ## Como atualizar
 
